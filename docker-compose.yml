@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      LINKIN_ADMIN_PASSWORD: ${LINKIN_ADMIN_PASSWORD}
+      LINKIN_AUTH_SECRET: ${LINKIN_AUTH_SECRET}
+    volumes:
+      - linkin_data:/app/data
+    networks:
+      - linkin
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+    networks:
+      - linkin
+
+volumes:
+  linkin_data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  linkin:

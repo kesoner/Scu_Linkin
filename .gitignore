@@ -1,0 +1,9 @@
+# Local and generated files
+.env
+.env.*
+!.env.example
+web/node_modules/
+web/.next/
+web/.next-build/
+web/data/*.db
+*.log
