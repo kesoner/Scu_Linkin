@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   distDir: ".next-build",
+  output: "standalone",
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
