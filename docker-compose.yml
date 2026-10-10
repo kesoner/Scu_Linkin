@@ -10,3 +10,21 @@ services:
       - "127.0.0.1:3000:3000"
     volumes:
       - ./data:/app/data
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: sculinkin-caddy
+    restart: unless-stopped
+    depends_on:
+      - sculinkin
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

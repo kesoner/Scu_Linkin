@@ -1,4 +1,4 @@
 sculinkin.xuyuzu.online {
   encode zstd gzip
-  reverse_proxy app:3000
+  reverse_proxy sculinkin:3000
 }
